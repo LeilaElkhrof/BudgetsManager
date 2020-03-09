@@ -45,12 +45,7 @@ public class BudgetEntiteServiceImpl implements BudgetEntiteService {
 	}
 
 	public boolean validateBudgetEntites(Budget budget, List<BudgetEntite> budgetEntites) {
-
-		/* if (budgetEntites == null || budgetEntites.isEmpty()) {
-		System.out.println("budgetEntites est vide!!!");
-			return false;
-		}*/
-
+		
 		List<BudgetEntite> valideEntites = new ArrayList();
 		
 		for(BudgetEntite budgetEntite : budgetEntites) {
