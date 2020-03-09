@@ -37,5 +37,93 @@ public class Personnel implements Serializable {
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date dateAffectation;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public double getSalaire() {
+		return salaire;
+	}
+
+	public void setSalaire(double salaire) {
+		this.salaire = salaire;
+	}
+
+	public PosteResponsabilite getPoste() {
+		return poste;
+	}
+
+	public void setPoste(PosteResponsabilite poste) {
+		this.poste = poste;
+	}
+
+	public Echelon getEchelon() {
+		return echelon;
+	}
+
+	public void setEchelon(Echelon echelon) {
+		this.echelon = echelon;
+	}
+
+	public EntiteAdministrative getEntiteAdm() {
+		return entiteAdm;
+	}
+
+	public void setEntiteAdm(EntiteAdministrative entiteAdm) {
+		this.entiteAdm = entiteAdm;
+	}
+
+	public Date getDateAffectation() {
+		return dateAffectation;
+	}
+
+	public void setDateAffectation(Date dateAffectation) {
+		this.dateAffectation = dateAffectation;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personnel other = (Personnel) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	public Personnel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 
 }

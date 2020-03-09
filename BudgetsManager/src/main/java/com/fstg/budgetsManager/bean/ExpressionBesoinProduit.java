@@ -11,12 +11,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Data
-@NoArgsConstructor
 public class ExpressionBesoinProduit implements Serializable {
 
 	/**
@@ -37,5 +32,69 @@ public class ExpressionBesoinProduit implements Serializable {
 	private double qteDemande;
 	private double qteAccorde;
 	private double qteAchete;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Produit getProduit() {
+		return produit;
+	}
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+	public ExpressionBesoin getEb() {
+		return eb;
+	}
+	public void setEb(ExpressionBesoin eb) {
+		this.eb = eb;
+	}
+	public double getQteDemande() {
+		return qteDemande;
+	}
+	public void setQteDemande(double qteDemande) {
+		this.qteDemande = qteDemande;
+	}
+	public double getQteAccorde() {
+		return qteAccorde;
+	}
+	public void setQteAccorde(double qteAccorde) {
+		this.qteAccorde = qteAccorde;
+	}
+	public double getQteAchete() {
+		return qteAchete;
+	}
+	public void setQteAchete(double qteAchete) {
+		this.qteAchete = qteAchete;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExpressionBesoinProduit other = (ExpressionBesoinProduit) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	public ExpressionBesoinProduit() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

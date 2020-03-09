@@ -6,60 +6,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Entity
-@Data
-@NoArgsConstructor
-public class ProduitAchat implements Serializable {
-
+public class CategorieProduit implements Serializable{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
-	private double quantite;
-	private String ref;
-	@ManyToOne
-	private Produit produit;
-	@ManyToOne
-	private Achat achat;
+	private String libelle;
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public double getQuantite() {
-		return quantite;
+	public String getLibelle() {
+		return libelle;
 	}
-	public void setQuantite(double quantite) {
-		this.quantite = quantite;
+	
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
-	public String getRef() {
-		return ref;
-	}
-	public void setRef(String ref) {
-		this.ref = ref;
-	}
-	public Produit getProduit() {
-		return produit;
-	}
-	public void setProduit(Produit produit) {
-		this.produit = produit;
-	}
-	public Achat getAchat() {
-		return achat;
-	}
-	public void setAchat(Achat achat) {
-		this.achat = achat;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +40,7 @@ public class ProduitAchat implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,7 +49,7 @@ public class ProduitAchat implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProduitAchat other = (ProduitAchat) obj;
+		CategorieProduit other = (CategorieProduit) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -83,10 +57,18 @@ public class ProduitAchat implements Serializable {
 			return false;
 		return true;
 	}
-	public ProduitAchat() {
+	
+	public CategorieProduit() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public CategorieProduit(Long id, String libelle) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+	}
 	
+	
+
 }
