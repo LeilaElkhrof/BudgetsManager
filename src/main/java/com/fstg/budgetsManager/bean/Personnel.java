@@ -1,31 +1,25 @@
 package com.fstg.budgetsManager.bean;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
+
+@Entity
 public class Personnel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String cin;
 	private double salaire;
-	
-	@ManyToOne
-	@JoinColumn(name = "poste_id")
-	private PosteResponsabilite poste;
-	
 	@ManyToOne 
 	@JoinColumn(name = "echelon_id")
 	private Echelon echelon;
@@ -34,8 +28,36 @@ public class Personnel implements Serializable {
 	@JoinColumn(name = "entite_id")
 	private EntiteAdministrative entiteAdm;
 	
-	@Temporal(javax.persistence.TemporalType.DATE)
+	//@Temporal(javax.persistence.TemporalType.DATE)
 	private Date dateAffectation;
+
+
+	public Personnel() {
+		super();
+	}
+	
+	public Date getDateAffectation() {
+		return dateAffectation;
+	}
+
+	public void setDateAffectation(Date dateAffectation) {
+		this.dateAffectation = dateAffectation;
+	}
+	public EntiteAdministrative getEntiteAdm() {
+		return entiteAdm;
+	}
+
+	public void setEntiteAdm(EntiteAdministrative entiteAdm) {
+		this.entiteAdm = entiteAdm;
+	}
+
+	public Echelon getEchelon() {
+		return echelon;
+	}
+
+	public void setEchelon(Echelon echelon) {
+		this.echelon = echelon;
+	}
 
 	public Long getId() {
 		return id;
@@ -59,38 +81,6 @@ public class Personnel implements Serializable {
 
 	public void setSalaire(double salaire) {
 		this.salaire = salaire;
-	}
-
-	public PosteResponsabilite getPoste() {
-		return poste;
-	}
-
-	public void setPoste(PosteResponsabilite poste) {
-		this.poste = poste;
-	}
-
-	public Echelon getEchelon() {
-		return echelon;
-	}
-
-	public void setEchelon(Echelon echelon) {
-		this.echelon = echelon;
-	}
-
-	public EntiteAdministrative getEntiteAdm() {
-		return entiteAdm;
-	}
-
-	public void setEntiteAdm(EntiteAdministrative entiteAdm) {
-		this.entiteAdm = entiteAdm;
-	}
-
-	public Date getDateAffectation() {
-		return dateAffectation;
-	}
-
-	public void setDateAffectation(Date dateAffectation) {
-		this.dateAffectation = dateAffectation;
 	}
 
 	@Override
@@ -118,12 +108,8 @@ public class Personnel implements Serializable {
 		return true;
 	}
 
-	public Personnel() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	
-
 }
+
+
+
+
