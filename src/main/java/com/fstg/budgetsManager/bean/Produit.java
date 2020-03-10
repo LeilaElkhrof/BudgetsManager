@@ -26,7 +26,7 @@ public class Produit implements Serializable {
 	private String img;
 	
 	@ManyToOne
-	private CategorieProduit cat;
+	private Category cat;
 
 	public Long getId() {
 		return id;
@@ -60,11 +60,11 @@ public class Produit implements Serializable {
 		this.img = img;
 	}
 
-	public CategorieProduit getCat() {
+	public Category getCat() {
 		return cat;
 	}
 
-	public void setCat(CategorieProduit cat) {
+	public void setCat(Category cat) {
 		this.cat = cat;
 	}
 

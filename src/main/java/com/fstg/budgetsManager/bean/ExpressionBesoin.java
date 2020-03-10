@@ -13,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
 public class ExpressionBesoin implements Serializable {
 
@@ -38,6 +35,11 @@ public class ExpressionBesoin implements Serializable {
 	
 	@OneToMany(mappedBy = "eb") 
 	private List<ExpressionBesoinProduit> ebp;
+	
+	public ExpressionBesoin() {
+		
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -104,10 +106,6 @@ public class ExpressionBesoin implements Serializable {
 		return true;
 	}
 
-	public ExpressionBesoin() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	
 	
 }

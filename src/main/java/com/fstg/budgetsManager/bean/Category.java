@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class CategorieProduit implements Serializable{
+public class Category implements Serializable{
 	
 	/**
 	 * 
@@ -49,7 +49,7 @@ public class CategorieProduit implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CategorieProduit other = (CategorieProduit) obj;
+		Category other = (Category) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -58,12 +58,12 @@ public class CategorieProduit implements Serializable{
 		return true;
 	}
 	
-	public CategorieProduit() {
+	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CategorieProduit(Long id, String libelle) {
+	public Category(Long id, String libelle) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
