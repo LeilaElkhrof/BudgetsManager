@@ -15,7 +15,7 @@ import com.fstg.budgetsManager.model.service.facade.ProduitService;
 
 @RestController
 @RequestMapping("products/")
-public class ProductRestApi {
+public class ProductRest{
 	
 	@Autowired
 	private ProduitService ps;

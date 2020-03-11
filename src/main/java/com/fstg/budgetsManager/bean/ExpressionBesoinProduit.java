@@ -25,18 +25,29 @@ public class ExpressionBesoinProduit implements Serializable {
 	@ManyToOne
 	private Produit produit;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private ExpressionBesoin eb;
 	
 	private double qteDemande;
 	private double qteAccorde;
 	private double qteAchete;
+	
+	private String product_desc;
+	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getDesc() {
+		return product_desc;
+	}
+	public void setDesc(String desc) {
+		this.product_desc = desc;
 	}
 	public Produit getProduit() {
 		return produit;

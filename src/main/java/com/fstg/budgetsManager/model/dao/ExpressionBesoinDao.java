@@ -9,5 +9,6 @@ import com.fstg.budgetsManager.bean.ExpressionBesoin;
 
 @Repository
 public interface ExpressionBesoinDao extends JpaRepository<ExpressionBesoin, Long> {
-	public List<ExpressionBesoin> findByEntiteAdministrativeLibelle(String libelle);
+	ExpressionBesoin findByTitle(String title);
+	List<ExpressionBesoin> findByEntiteAdministrativeLibelle(String libelle);
 }

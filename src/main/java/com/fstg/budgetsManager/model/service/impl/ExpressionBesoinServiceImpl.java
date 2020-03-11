@@ -34,25 +34,23 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 	public int createExpB(ExpressionBesoin expb) {
 
 		/* get The Personnel */
-		Personnel chefBD = ps.findByCin(expb.getPersonnel().getCin());
+		//Personnel chefBD = ps.findByCin(expb.getPersonnel().getCin());
 
 		// get The Personnel EntiteAdmin
-		EntiteAdministrative enAdBD = es.findByLibelle(expb.getEntiteAdministrative().getLibelle());
+		//EntiteAdministrative enAdBD = es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
 
 		// get The List Of Product - Test There Existing & Save EBP
 		List<ExpressionBesoinProduit> exbProduit = expb.getEbp();
 
-		/*
-		 * if (enAdBD == null || enAdBD.equals(chefBD.getEntiteAdministratif())) { //
-		 * EntiteAdmin Doesn't exist return -3; } else {
-		 */
-		expb.setPersonnel(chefBD);
-		expb.setEntiteAdministrative(enAdBD);
-		expb.setDateExpressionBessoin(new Date());
-		expbDao.save(expb);
-		esp.valideAndsaveEBP(exbProduit, expb);
-		return 1;
-		// }
+		/*if (enAdBD == null) {
+			// EntiteAdmin Doesn't exist
+			return -1;
+		} */
+			
+			expb.setDateExpressionBessoin(new Date());
+			expbDao.save(expb);
+			esp.valideAndsaveEBP(exbProduit, expb);
+			return 1;
 
 	}
 

@@ -25,6 +25,8 @@ public class ExpressionBesoin implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String title;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateExpressionBessoin;
 	
@@ -64,6 +66,18 @@ public class ExpressionBesoin implements Serializable {
 	public void setPersonnel(Personnel personnel) {
 		this.personnel = personnel;
 	}
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 
 	public EntiteAdministrative getEntiteAdministrative() {
 		return entiteAdministrative;
