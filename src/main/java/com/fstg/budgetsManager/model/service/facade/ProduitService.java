@@ -9,4 +9,5 @@ public interface ProduitService {
 	int createProduct(Produit p);
 	Produit getProductByCodeScanBar(String codeScanBar);
 	List<Produit> getProductesByCategory(String libelle);
+	Produit findByCodeScanbar(String codeScanBar);
 }

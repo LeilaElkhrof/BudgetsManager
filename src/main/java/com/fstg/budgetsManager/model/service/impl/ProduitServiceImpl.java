@@ -48,4 +48,9 @@ public class ProduitServiceImpl implements ProduitService {
 		return pDao.findByCatLibelle(libelle);
 	}
 
+	@Override
+	public Produit findByCodeScanbar(String codeScanBar) {
+		return pDao.findByCodeScanbar(codeScanBar);
+	}
+
 }
