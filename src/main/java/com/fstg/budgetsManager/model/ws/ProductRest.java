@@ -15,10 +15,15 @@ import com.fstg.budgetsManager.model.service.facade.ProduitService;
 
 @RestController
 @RequestMapping("products/")
-public class ProductRest{
-	
+public class ProductRest {
+
 	@Autowired
 	private ProduitService ps;
+
+	@GetMapping("/codeScanBar/{codeScanBar}")
+	public Produit findByCodeScanbar(@PathVariable String codeScanBar) {
+		return ps.findByCodeScanbar(codeScanBar);
+	}
 
 	@PostMapping("")
 	public int createProduct(@RequestBody Produit p) {
@@ -34,7 +39,5 @@ public class ProductRest{
 	public List<Produit> getProductesByCategory(@PathVariable String libelle) {
 		return ps.getProductesByCategory(libelle);
 	}
-	
-	
 
 }
