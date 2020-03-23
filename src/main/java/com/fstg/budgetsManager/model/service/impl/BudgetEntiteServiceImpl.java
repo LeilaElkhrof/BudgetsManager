@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fstg.budgetsManager.bean.Budget;
 import com.fstg.budgetsManager.bean.BudgetEntite;
@@ -44,31 +45,45 @@ public class BudgetEntiteServiceImpl implements BudgetEntiteService {
 		return budgetEntiteDao.findByEntiteLibelle(libelle);
 	}
 
-	public boolean validateBudgetEntites(Budget budget, List<BudgetEntite> budgetEntites) {
-		
-		List<BudgetEntite> valideEntites = new ArrayList();
+	public List<BudgetEntite> validateBudgetEntites(List<BudgetEntite> budgetEntites) {
+
+		List<BudgetEntite> valideEntites = new ArrayList<BudgetEntite>();
 		
 		for(BudgetEntite budgetEntite : budgetEntites) {
 			if(entiteService.findByLibelle(budgetEntite.getEntite().getLibelle()) != null) {
 				valideEntites.add(budgetEntite);
 			}
 		}
-		return valideEntites.size() == budgetEntites.size();
+		return valideEntites;
 	}
 
 	@Override
 	public int save(Budget budget, List<BudgetEntite> budgetEntites) {
-		if (validateBudgetEntites(budget, budgetEntites)) {		    
-	    	    budgetEntites.forEach(b -> {
-				b.setBudget(budget);
-				EntiteAdministrative entite = entiteService.findByLibelle(b.getEntite().getLibelle());
-				b.setEntite(entite);
-				budgetEntiteDao.save(b);
-			});
+		List<BudgetEntite> valideEntites = validateBudgetEntites(budgetEntites);
+		if (valideEntites != null) {		    
+			for(BudgetEntite valideEntite : valideEntites) {
+				valideEntite.setBudget(budget);
+				EntiteAdministrative entite = entiteService.findByLibelle(valideEntite.getEntite().getLibelle());
+				valideEntite.setEntite(entite);
+				budgetEntiteDao.save(valideEntite);
+			}
 	       return 1;
 		} else 
 			return -2;
 	}
+	
+	@Override
+	@Transactional
+	public int deleteByReference(String reference) {
+		return budgetEntiteDao.deleteByReference(reference);
+	}
 
+	@Override
+	@Transactional
+	public int deleteByBudgetReference(String reference) {
+		return budgetEntiteDao.deleteByBudgetReference(reference);
+	}
+
+	
 	
 }

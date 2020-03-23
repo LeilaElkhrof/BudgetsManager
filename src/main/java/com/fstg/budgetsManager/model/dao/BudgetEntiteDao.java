@@ -13,4 +13,7 @@ public interface BudgetEntiteDao extends JpaRepository<BudgetEntite, Long> {
 	public List<BudgetEntite> findByBudgetReference(String reference);
 	public List<BudgetEntite> findByEntiteLibelle(String libelle);
 	public BudgetEntite findByReference(String reference);
+	public int deleteByBudgetReference(String reference);
+	public int deleteByReference(String reference);
+	
 }

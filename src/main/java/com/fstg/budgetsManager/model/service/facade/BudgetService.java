@@ -9,9 +9,7 @@ import com.fstg.budgetsManager.bean.BudgetEntite;
 public interface BudgetService {
 	
 	  public Budget findByReference(String reference);
-		public List<Budget> findHigh( double valeur) ;
-		public List<Budget> findLow(double valeur) ;
-		public List<Budget> findAll();
-		public int save(Budget budget, List<BudgetEntite> budgetEntites);
-		
+	  public List<Budget> findAll();
+	  public int save(Budget budget, List<BudgetEntite> budgetEntites);
+	  public int deleteByReference(String reference);
 	}

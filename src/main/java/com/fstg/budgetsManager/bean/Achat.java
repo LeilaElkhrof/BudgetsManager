@@ -12,9 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Entity
 public class Achat implements Serializable {
