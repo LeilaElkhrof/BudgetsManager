@@ -15,7 +15,7 @@ import com.fstg.budgetsManager.model.dao.PersonnelDao;
 import com.fstg.budgetsManager.model.service.facade.EchelonService;
 import com.fstg.budgetsManager.model.service.facade.EntiteAdmService;
 import com.fstg.budgetsManager.model.service.facade.PersonnelService;
-import com.fstg.budgetsManager.model.util.DateUtill;
+import com.fstg.budgetsManager.model.util.DateUtil;
 
 
 
@@ -106,7 +106,7 @@ public class PersonnelServiceImpl implements PersonnelService {
 			return -1;
 		}
 		else {
-				int mois = DateUtill.getMounthsDifference(new Date(), foundedPersonne.getDateAffectation());
+				int mois = DateUtil.getMounthsDifference(new Date(), foundedPersonne.getDateAffectation());
 		System.out.println(mois);
 		if (mois < foundedPersonne.getEchelon().getEchelonNext().getMinMois()) {
 			return -2;
