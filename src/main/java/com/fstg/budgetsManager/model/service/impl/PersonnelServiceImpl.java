@@ -1,10 +1,12 @@
 package com.fstg.budgetsManager.model.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.fstg.budgetsManager.bean.Echelon;
 import com.fstg.budgetsManager.bean.EntiteAdministrative;
@@ -13,6 +15,7 @@ import com.fstg.budgetsManager.model.dao.PersonnelDao;
 import com.fstg.budgetsManager.model.service.facade.EchelonService;
 import com.fstg.budgetsManager.model.service.facade.EntiteAdmService;
 import com.fstg.budgetsManager.model.service.facade.PersonnelService;
+import com.fstg.budgetsManager.model.util.DateUtill;
 
 
 
@@ -93,11 +96,33 @@ public class PersonnelServiceImpl implements PersonnelService {
 	
 		return personnelRepository.findPetitSalaire(valeur);
 	}
-
 	@Override
 	public int transfert(String cin) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		Personnel foundedPersonne = findByCin(cin);
+		
+		if(foundedPersonne == null)
+		{
+			return -1;
+		}
+		else {
+				int mois = DateUtill.getMounthsDifference(new Date(), foundedPersonne.getDateAffectation());
+		System.out.println(mois);
+		if (mois < foundedPersonne.getEchelon().getEchelonNext().getMinMois()) {
+			return -2;
+		}
+
+		else {
+			
+			foundedPersonne.setEchelon(foundedPersonne.getEchelon().getEchelonNext());
+
+			personnelRepository.save(foundedPersonne);
+
+			return 1;
+		}
+	
+		}
+
 	}
 
 	
