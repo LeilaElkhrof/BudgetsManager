@@ -6,6 +6,8 @@ import com.fstg.budgetsManager.bean.ExpressionBesoin;
 import com.fstg.budgetsManager.bean.ExpressionBesoinProduit;
 
 public interface ExpressionBesoinProduitService {
-	public int createExpBsproduit(List<ExpressionBesoinProduit> ebpS);
-	public void valideAndsaveEBP(List<ExpressionBesoinProduit> ebpS,ExpressionBesoin eb);
+	void valideAndsaveEBP(List<ExpressionBesoinProduit> ebpS,ExpressionBesoin eb);
+	List<ExpressionBesoinProduit> findByEbId(Long ebID);
+	int deleteByEbId(Long id);
+
 }

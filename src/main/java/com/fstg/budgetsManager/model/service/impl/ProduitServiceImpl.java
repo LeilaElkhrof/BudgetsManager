@@ -23,7 +23,7 @@ public class ProduitServiceImpl implements ProduitService {
 
 	@Override
 	public int createProduct(Produit p) {
-		Produit produit = getProductByCodeScanBar(p.getCodeScanbar());
+		Produit produit = findByCodeScanBar(p.getCodeScanbar());
 		System.out.println(p.getCat());
 		Category catDB=cs.findByLibelle(p.getCat().getLibelle());
 
@@ -38,12 +38,12 @@ public class ProduitServiceImpl implements ProduitService {
 	}
 
 	@Override
-	public Produit getProductByCodeScanBar(String codeScanBar) {
+	public Produit findByCodeScanBar(String codeScanBar) {
 		return pDao.findByCodeScanbar(codeScanBar);
 	}
 
 	@Override
-	public List<Produit> getProductesByCategory(String libelle) {
+	public List<Produit> findByCategory(String libelle) {
 		
 		return pDao.findByCatLibelle(libelle);
 	}
