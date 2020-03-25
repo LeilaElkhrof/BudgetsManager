@@ -44,8 +44,8 @@ public class AchatServiceImpl implements AchatService {
 		Achat achatFound = findByCode(achat.getCode());
 		if (achatFound != null) {
 			return -1;
-		} else if (!produitAchatService.ValidateProduit(achat, produitAchats)) {
-			return -2;
+//		} else if (!produitAchatService.ValidateProduit(achat, produitAchats)) {
+//			return -2;
 		} else {
 			achat.setDateAchat(new Date());
 			calculerMontantTotal( achat, produitAchats);
@@ -55,7 +55,7 @@ public class AchatServiceImpl implements AchatService {
 		}
 
 	}
-	@Override
+
 	public void calculerMontantTotal(Achat achat, List<ProduitAchat> produitAchats) {
 		double montantTotal=0;
 		for (ProduitAchat produitAchat : produitAchats) {

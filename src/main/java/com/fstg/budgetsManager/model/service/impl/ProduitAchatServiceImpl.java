@@ -37,29 +37,27 @@ public class ProduitAchatServiceImpl implements ProduitAchatService {
 
 	@Override
 	public int save(Achat achat, List<ProduitAchat> produitAchats) {
-		if (ValidateProduit(achat, produitAchats)) {
 			for (ProduitAchat produitAchat : produitAchats) {
 				Produit produit = produitService.findByCodeScanbar(produitAchat.getProduit().getCodeScanbar());
 				produitAchat.setProduit(produit);
 				produitAchat.setAchat(achat);
 				produitAchatDao.save(produitAchat);
-				return 1;
+				
 			}
-		}
-		return -1;
+			return 1;
 
 	}
 
-	@Override
-	public boolean ValidateProduit(Achat achat, List<ProduitAchat> produitAchats) {
-		List<ProduitAchat> produitValider = new ArrayList<ProduitAchat>();
-		for (ProduitAchat produitAchat : produitAchats) {
-			if (produitService.findByCodeScanbar(produitAchat.getProduit().getCodeScanbar()) != null) {
-				produitValider.add(produitAchat);
-			}
-		}
-		return produitValider.size() == produitAchats.size();
-	}
+//	@Override
+//	public boolean ValidateProduit(Achat achat, List<ProduitAchat> produitAchats) {
+//		List<ProduitAchat> produitValider = new ArrayList<ProduitAchat>();
+//		for (ProduitAchat produitAchat : produitAchats) {
+//			if (produitService.findByCodeScanbar(produitAchat.getProduit().getCodeScanbar()) != null) {
+//				produitValider.add(produitAchat);
+//			}
+//		}
+//		return produitValider.size() == produitAchats.size();
+//	}
 
 	@Override
 	public int updateAchat(double quantite, List<ProduitAchat> produitAchats) {

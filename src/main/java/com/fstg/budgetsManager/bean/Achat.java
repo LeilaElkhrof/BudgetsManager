@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +33,7 @@ public class Achat implements Serializable {
 	private Date dateAchat;
 	private double montantTotal;
 	@OneToMany(mappedBy = "achat")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<ProduitAchat> produitAchats;
 	
 	public Long getId() {
