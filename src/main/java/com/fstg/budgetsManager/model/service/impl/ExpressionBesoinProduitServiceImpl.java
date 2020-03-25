@@ -22,16 +22,7 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 	@Autowired
 	private ProduitService ps;
 
-	@Override
-	public int createExpBsproduit(List<ExpressionBesoinProduit> expBsPrds) {
-		if (expBsPrds.size() <= 0) {
-			return -1;
-		} else {
-			expBsProDao.saveAll(expBsPrds);
-			return 1;
-		}
 
-	}
 
 	@Override
 	public void valideAndsaveEBP(List<ExpressionBesoinProduit> exbProduit,ExpressionBesoin eb) {
@@ -39,16 +30,28 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 		while (itr.hasNext()) {
 			ExpressionBesoinProduit expBP = itr.next();
 			
-			//Associated Product 
-			Produit pBD = ps.getProductByCodeScanBar(expBP.getProduit().getCodeScanbar());
+			/*Associated Product*/
+			Produit pBD = ps.findByCodeScanbar(expBP.getProduit().getCodeScanbar());
 			
 			//Product Exist
-			if (pBD != null) {
+			if (pBD != null)
 				expBP.setProduit(pBD);
 				expBP.setEb(eb);
 				expBsProDao.save(expBP);
-			} 
+			
 		}
 	}
+
+	@Override
+	public List<ExpressionBesoinProduit> findByEbId(Long ebID) {
+		return expBsProDao.findByEbId(ebID);
+	}
+
+	@Override
+	public int deleteByEbId(Long id) {
+		return expBsProDao.deleteByEbId(id);
+	}
+
+
 
 }

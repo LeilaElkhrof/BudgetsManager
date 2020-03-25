@@ -3,6 +3,7 @@ package com.fstg.budgetsManager.model.ws;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,12 @@ import com.fstg.budgetsManager.model.service.facade.ProduitService;
 
 @RestController
 @RequestMapping("products/")
-public class ProductRest {
+
+@CrossOrigin(value = "http://localhost:4200",maxAge = 3600)
+public class ProductRest{
+
+
+
 
 	@Autowired
 	private ProduitService ps;
@@ -32,12 +38,12 @@ public class ProductRest {
 
 	@GetMapping("{scodeScanBar}")
 	public Produit getProductByCodeScanBar(@PathVariable String codeScanBar) {
-		return ps.getProductByCodeScanBar(codeScanBar);
+		return ps.findByCodeScanbar(codeScanBar);
 	}
 
 	@GetMapping("cat/{libelle}")
 	public List<Produit> getProductesByCategory(@PathVariable String libelle) {
-		return ps.getProductesByCategory(libelle);
+		return ps.findByCategory(libelle);
 	}
 
 }

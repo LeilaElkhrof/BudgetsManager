@@ -32,48 +32,53 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public List<Budget> findHigh(double valeur) {
-		return budgetDao.findHigh(valeur);
-	}
-
-	@Override
-	public List<Budget> findLow(double valeur) {
-		return budgetDao.findLow(valeur);
-	}
-
-	@Override
 	public List<Budget> findAll() {
 		return budgetDao.findAll();
 	}
+	
+public double[] CalculMontant(List<BudgetEntite> budgetEntites){
+	double totalMontantInv = 0.0, totalMontantFonc = 0.0;
+	
+	  for(BudgetEntite budgetEntite : budgetEntites) {
+		 totalMontantFonc += budgetEntite.getMontantFonct();
+		 totalMontantInv += budgetEntite.getMontantInv();
+	  }
+	  
+	  double[] montants = {totalMontantFonc, totalMontantInv};
+	return montants;
+}
 
 	@Override
 	public int save(Budget budget, List<BudgetEntite> budgetEntites) {
        Budget foundedBudget = findByReference(budget.getReference());
-       
-       double totalMontantInv = 0.0, totalMontantFonc = 0.0;
-		
-		  for(BudgetEntite budgetEntite : budgetEntites) {
-			 totalMontantFonc += budgetEntite.getMontantFonct();
-			 totalMontantInv += budgetEntite.getMontantInv();
-		  }
-		  
+  
+       double[] montants = CalculMontant(budgetEntites);
+ 		  
        if(foundedBudget != null)
     	   return -1;
        
-       else if(!budgetEntiteService.validateBudgetEntites(budget, budgetEntites)) {
+       else if(budgetEntiteService.validateBudgetEntites(budgetEntites) == null) {
     	   return -2;
        }
        
-       else if( totalMontantFonc > budget.getMontantFonct() || totalMontantInv > budget.getMontantInv())
+       else if( montants[0] > budget.getMontantFonct() || montants[1] > budget.getMontantInv())
     	   return -3;
        
-       else{
+       else{    	   
 		budget.setAnnee(DateUtil.year());
     	   budgetDao.save(budget);
     	   budgetEntiteService.save(budget, budgetEntites);
     	   return 1;
        }
 		
+	}
+
+	@Override
+	@Transactional
+	public int deleteByReference(String reference) {
+		int res1 = budgetEntiteService.deleteByBudgetReference(reference);
+		int res2 = budgetDao.deleteByReference(reference);
+		return res1 + res2;
 	}
 
 }

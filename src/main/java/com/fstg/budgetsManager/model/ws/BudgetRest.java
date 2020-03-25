@@ -18,22 +18,17 @@ import com.fstg.budgetsManager.model.service.facade.BudgetService;
 @RequestMapping("budget-api/budgets")
 public class BudgetRest {
 
-     @Autowired
+	 @Autowired
      BudgetService budgetService;
 
-     @GetMapping("/reference/{reference}")
+     @DeleteMapping("/reference/{reference}")
+     public int deleteByReference(@PathVariable String reference) {
+		return budgetService.deleteByReference(reference);
+	}
+
+	@GetMapping("/reference/{reference}")
      public Budget findByReference(@PathVariable String reference) {
    	 return budgetService.findByReference(reference);
-     }
-
-     @GetMapping("/valeurh/{valeur}")
-     public List<Budget> findHigh(@PathVariable int valeur) {
-	 return budgetService.findHigh(valeur);
-     }
-    
-     @GetMapping("/valeurl/{valeur}")
-     public List<Budget> findLow(@PathVariable int valeur) {
-	 return budgetService.findLow(valeur);
      }
 
      @GetMapping("/")
