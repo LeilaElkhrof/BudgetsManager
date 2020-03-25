@@ -16,11 +16,20 @@ import com.fstg.budgetsManager.model.service.facade.ProduitService;
 
 @RestController
 @RequestMapping("products/")
+
 @CrossOrigin(value = "http://localhost:4200",maxAge = 3600)
 public class ProductRest{
-	
+
+
+
+
 	@Autowired
 	private ProduitService ps;
+
+	@GetMapping("/codeScanBar/{codeScanBar}")
+	public Produit findByCodeScanbar(@PathVariable String codeScanBar) {
+		return ps.findByCodeScanbar(codeScanBar);
+	}
 
 	@PostMapping("")
 	public int createProduct(@RequestBody Produit p) {
@@ -29,14 +38,12 @@ public class ProductRest{
 
 	@GetMapping("{scodeScanBar}")
 	public Produit getProductByCodeScanBar(@PathVariable String codeScanBar) {
-		return ps.findByCodeScanBar(codeScanBar);
+		return ps.findByCodeScanbar(codeScanBar);
 	}
 
 	@GetMapping("cat/{libelle}")
 	public List<Produit> getProductesByCategory(@PathVariable String libelle) {
 		return ps.findByCategory(libelle);
 	}
-	
-	
 
 }

@@ -11,5 +11,6 @@ import com.fstg.budgetsManager.bean.EntiteAdministrative;
 public interface EntiteAdministrativeDao extends JpaRepository<EntiteAdministrative, Long> {
 	
 	public EntiteAdministrative findByLibelle(String libelle);
+	public int deleteByLibelle(String libelle);
 
 }

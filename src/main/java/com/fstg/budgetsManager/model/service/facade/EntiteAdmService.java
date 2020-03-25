@@ -9,4 +9,5 @@ public interface EntiteAdmService {
 	public EntiteAdministrative findByLibelle(String libelle);
 	public List<EntiteAdministrative> findAll();
 	public int save(EntiteAdministrative entite);
+	public int deleteByLibelle(String libelle);
 }

@@ -23,6 +23,7 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 	private ProduitService ps;
 
 
+
 	@Override
 	public void valideAndsaveEBP(List<ExpressionBesoinProduit> exbProduit,ExpressionBesoin eb) {
 		Iterator<ExpressionBesoinProduit> itr = exbProduit.iterator();
@@ -30,7 +31,7 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 			ExpressionBesoinProduit expBP = itr.next();
 			
 			/*Associated Product*/
-			Produit pBD = ps.findByCodeScanBar(expBP.getProduit().getCodeScanbar());
+			Produit pBD = ps.findByCodeScanbar(expBP.getProduit().getCodeScanbar());
 			
 			//Product Exist
 			if (pBD != null)
