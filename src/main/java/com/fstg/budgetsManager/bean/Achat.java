@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,9 +31,14 @@ public class Achat implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateAchat;
 	private double montantTotal;
+	
 	@OneToMany(mappedBy = "achat")
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<ProduitAchat> produitAchats;
+	
+	@OneToMany(mappedBy = "achat")
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private List<AchatBudgetEntite> achatBudgetEntites;
 	
 	public Long getId() {
 		return id;
@@ -63,6 +69,14 @@ public class Achat implements Serializable {
 	}
 	public void setProduitAchats(List<ProduitAchat> produitAchats) {
 		this.produitAchats = produitAchats;
+	}
+	
+
+	public List<AchatBudgetEntite> getAchatBudgetEntites() {
+		return achatBudgetEntites;
+	}
+	public void setAchatBudgetEntites(List<AchatBudgetEntite> achatBudgetEntites) {
+		this.achatBudgetEntites = achatBudgetEntites;
 	}
 	@Override
 	public int hashCode() {

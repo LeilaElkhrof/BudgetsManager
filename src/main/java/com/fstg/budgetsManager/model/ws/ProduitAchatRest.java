@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +18,8 @@ import com.fstg.budgetsManager.bean.Achat;
 import com.fstg.budgetsManager.bean.ProduitAchat;
 import com.fstg.budgetsManager.model.service.facade.ProduitAchatService;
 
-
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RequestMapping("ProduitAchat")
 public class ProduitAchatRest {
 	@Autowired
@@ -31,9 +31,9 @@ public class ProduitAchatRest {
 		return produitAchatService.findByAchatDateAchat(dateAchat);
 	}
 
-	@GetMapping("/Produit/codeScanbar/{codeScanbar}")
-	public List<ProduitAchat> findByProduitCodeScanbar(@PathVariable String codeScanbar) {
-		return produitAchatService.findByProduitCodeScanbar(codeScanbar);
+	@GetMapping("/Achat/code/{code}")
+	public List<ProduitAchat> findByAchatProduitCode(@PathVariable String code) {
+		return produitAchatService.findByAchatCode(code);
 	}
 
 	@PostMapping("/")
@@ -41,9 +41,14 @@ public class ProduitAchatRest {
 		return produitAchatService.save(achat, achat.getProduitAchats());
 	}
 
-	@PostMapping("/quantite/{quantite}")
-	public int updateAchat(@PathVariable double quantite, @RequestBody List<ProduitAchat> produitAchats) {
-		return produitAchatService.updateAchat(quantite, produitAchats);
+	@DeleteMapping("/produit/codeScanbar/{codeScanbar}")
+	public int deleteByProduitCodeScanbar(@PathVariable String codeScanbar) {
+		return produitAchatService.deleteByProduitCodeScanbar(codeScanbar);
+	}
+
+	@GetMapping("/produit/codeScanbar/{codeScanbar}")
+	public List<ProduitAchat> findByProduitCodeScanbar(@PathVariable String codeScanbar) {
+		return produitAchatService.findByProduitCodeScanbar(codeScanbar);
 	}
 
 }
