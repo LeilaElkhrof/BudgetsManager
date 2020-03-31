@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -28,8 +29,13 @@ public class ExpressionBesoin implements Serializable {
 	private String title;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dateExpressionBessoin;
+	private Date saveDate;
 	
+	@Temporal(TemporalType.DATE)
+	private Date lastUpDate;
+	
+	@ManyToOne
+	@JoinColumn(name="personnel_Id")
 	private Personnel personnel;
 	
 	@ManyToOne
@@ -51,14 +57,8 @@ public class ExpressionBesoin implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDateExpressionBessoin() {
-		return dateExpressionBessoin;
-	}
-
-	public void setDateExpressionBessoin(Date dateExpressionBessoin) {
-		this.dateExpressionBessoin = dateExpressionBessoin;
-	}
-
+	
+	
 	public Personnel getPersonnel() {
 		return personnel;
 	}
@@ -94,6 +94,27 @@ public class ExpressionBesoin implements Serializable {
 	public void setEbp(List<ExpressionBesoinProduit> ebp) {
 		this.ebp = ebp;
 	}
+	
+
+	public Date getSaveDate() {
+		return saveDate;
+	}
+
+
+	public void setSaveDate(Date saveDate) {
+		this.saveDate = saveDate;
+	}
+
+
+	public Date getLastUpDate() {
+		return lastUpDate;
+	}
+
+
+	public void setLastUpDate(Date lastUpDate) {
+		this.lastUpDate = lastUpDate;
+	}
+
 
 	@Override
 	public int hashCode() {

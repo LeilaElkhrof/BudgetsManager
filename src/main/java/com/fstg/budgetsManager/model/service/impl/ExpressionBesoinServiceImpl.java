@@ -33,45 +33,85 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 	private ExpressionBesoinProduitService ebps;
 
 	@Override
-	public int createExpB(ExpressionBesoin expb) {
+	public int saveEb(ExpressionBesoin expb) {
 
-		/* get The Personnel 
+		/* get The Personnel */
 		Personnel chefBD = ps.findByCin(expb.getPersonnel().getCin());
-
-		// get The Personnel EntiteAdmin
-		EntiteAdministrative enAdBD = es.findByLibelle(chefBD.getEntiteAdm().getLibelle());*/
 
 		// get The List Of Product - Test There Existing & Save EBP
 		List<ExpressionBesoinProduit> exbProduit = expb.getEbp();
 
-		/*if (enAdBD == null) {
-			// EntiteAdmin Doesn't exist
+		if (chefBD == null) {
+			// Personnel Doesn't exist
 			return -1;
-		}*/
-			
-			expb.setDateExpressionBessoin(new Date());
+		} else {
+			/*
+			 * get The Personnel EntiteAdmin EntiteAdministrative enAdBD =
+			 * es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
+			 */
+			expb.setSaveDate(new Date());
+			expb.setPersonnel(chefBD);
 			expbDao.save(expb);
 			ebps.valideAndsaveEBP(exbProduit, expb);
 			return 1;
 
+		}
+
 	}
 
+	@Override
+	public int updateEb(ExpressionBesoin expb) {
+		/* get The Personnel */
+		Personnel chefBD = ps.findByCin(expb.getPersonnel().getCin());
+
+		// get The List Of Product - Test There Existing & Save EBP
+		List<ExpressionBesoinProduit> exbProduit = expb.getEbp();
+
+		if (chefBD == null) {
+			// Personnel Doesn't exist
+			return -1;
+		} else {
+			/*
+			 * get The Personnel EntiteAdmin EntiteAdministrative enAdBD =
+			 * es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
+			 * testInfo(chefBD, enAdBD);
+			 */
+
+			expb.setLastUpDate(new Date());
+			expbDao.save(expb);
+			ebps.valideAndsaveEBP(exbProduit, expb);
+			return 1;
+
+		}
+	}
+	
+	@Override
+	public int deleteById(Long id) {
+		int res = ebps.deleteByEbId(id);
+		expbDao.deleteById(id);
+		return res;
+	}
+
+	public boolean testInfo(Personnel p, EntiteAdministrative e) {
+		return true;
+	}
 	@Override
 	public List<ExpressionBesoin> getAllExpB() {
 		return expbDao.findAll();
 	}
 
-	/* Expression Du Besoin D'une Entité Administrative */
 	@Override
 	public List<ExpressionBesoin> getByEntiteAdministrativeLibelle(String libelle) {
 		return expbDao.findByEntiteAdministrativeLibelle(libelle);
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		int res=ebps.deleteByEbId(id);
-		expbDao.deleteById(id);
-		return res;
+	public List<ExpressionBesoin> getByPersonnelCin(String cin) {
+		return expbDao.findByPersonnelCin(cin);
 	}
 
+	@Override
+	public List<ExpressionBesoin> getBySaveDate(Date saveDate) {
+		return expbDao.findBySaveDate(saveDate);
+	}
 }

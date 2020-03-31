@@ -23,7 +23,6 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 	private ProduitService ps;
 
 
-
 	@Override
 	public void valideAndsaveEBP(List<ExpressionBesoinProduit> exbProduit,ExpressionBesoin eb) {
 		Iterator<ExpressionBesoinProduit> itr = exbProduit.iterator();
@@ -49,7 +48,9 @@ public class ExpressionBesoinProduitServiceImpl implements ExpressionBesoinProdu
 
 	@Override
 	public int deleteByEbId(Long id) {
-		return expBsProDao.deleteByEbId(id);
+		expBsProDao.deleteByEbId(id);
+		return 1;
+				
 	}
 
 
