@@ -12,5 +12,8 @@ import com.fstg.budgetsManager.bean.ProduitAchat;
 public interface ProduitAchatDao extends JpaRepository<ProduitAchat, Long> {
 	public List<ProduitAchat> findByAchatDateAchat(Date dateAchat);
 
+	public List<ProduitAchat> findByAchatCode(String code);
 	public List<ProduitAchat> findByProduitCodeScanbar(String codeScanbar);
+	
+	public int deleteByProduitCodeScanbar(String codeScanbar);
 }

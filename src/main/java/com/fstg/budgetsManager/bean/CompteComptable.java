@@ -1,26 +1,25 @@
 package com.fstg.budgetsManager.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 @Entity
-public class Category implements Serializable{
-	
+public class CompteComptable implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String libelle;
-	@ManyToOne
-	private CompteComptable compteComptable;
+	@OneToMany(mappedBy = "compteComptable")
+    private List<Category> categories;
 	public Long getId() {
 		return id;
 	}
@@ -30,11 +29,19 @@ public class Category implements Serializable{
 	public String getLibelle() {
 		return libelle;
 	}
-	
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 	
+	public CompteComptable(Long id, String libelle) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+	}
+	public CompteComptable() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -42,7 +49,6 @@ public class Category implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -51,7 +57,7 @@ public class Category implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		CompteComptable other = (CompteComptable) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -59,18 +65,9 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-	
-	public Category() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "CompteComptable [id=" + id + ", libelle=" + libelle + "]";
 	}
 	
-	public Category(Long id, String libelle) {
-		super();
-		this.id = id;
-		this.libelle = libelle;
-	}
-	
-	
-
 }

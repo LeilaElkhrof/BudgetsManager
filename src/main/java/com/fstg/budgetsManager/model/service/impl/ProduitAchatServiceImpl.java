@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +33,8 @@ public class ProduitAchatServiceImpl implements ProduitAchatService {
 	}
 
 	@Override
-	public List<ProduitAchat> findByProduitCodeScanbar(String codeScanbar) {
-		return produitAchatDao.findByProduitCodeScanbar(codeScanbar);
+	public List<ProduitAchat> findByAchatCode(String code) {
+		return produitAchatDao.findByAchatCode(code);
 	}
 
 	@Override
@@ -59,20 +61,18 @@ public class ProduitAchatServiceImpl implements ProduitAchatService {
 //		return produitValider.size() == produitAchats.size();
 //	}
 
-	@Override
-	public int updateAchat(double quantite, List<ProduitAchat> produitAchats) {
 
-		for (ProduitAchat produitAchat : produitAchats) {
-			Achat achatfound = achatService.findByCode(produitAchat.getAchat().getCode());
-			Produit produitFound = produitService.findByCodeScanbar(produitAchat.getProduit().getCodeScanbar());
-			produitAchat.setProduit(produitFound);
-			produitAchat.setQuantite(quantite);
-			achatService.calculerMontantTotal(achatfound, produitAchats);
-			achatfound.setDateAchat(new Date());
-			produitAchat.setAchat(achatfound);
-			produitAchatDao.save(produitAchat);
-		}
-		return 1;
+	@Override
+	@Transactional
+	public int deleteByProduitCodeScanbar(String codeScanbar) {
+		int delProduit = produitAchatDao.deleteByProduitCodeScanbar(codeScanbar);
+		return delProduit;
 	}
 
+	@Override
+	public List<ProduitAchat> findByProduitCodeScanbar(String codeScanbar) {
+		return produitAchatDao.findByProduitCodeScanbar(codeScanbar);
+	}
+	
+		
 }

@@ -15,4 +15,5 @@ public interface AchatDao extends JpaRepository<Achat, Long>{
 	public Achat findByCode(String code);
 	public List<Achat> findByDateAchat(Date dateAchat);
 	public int deleteByCode(String code);
+	
 }
