@@ -44,6 +44,10 @@ public class ExpressionBesoin implements Serializable {
 	@OneToMany(mappedBy = "eb") 
 	private List<ExpressionBesoinProduit> ebp;
 	
+	private double montantTotal;
+	
+	private String stat;
+	
 	public ExpressionBesoin() {
 		
 	}
@@ -113,6 +117,30 @@ public class ExpressionBesoin implements Serializable {
 
 	public void setLastUpDate(Date lastUpDate) {
 		this.lastUpDate = lastUpDate;
+	}
+	
+
+
+	public double getMontantTotal() {
+		return montantTotal;
+	}
+
+
+	public void setMontantTotal(double montantTotal) {
+		this.montantTotal = montantTotal;
+	}
+	
+	
+	
+
+
+	public String getStat() {
+		return stat;
+	}
+
+
+	public void setStat(String stat) {
+		this.stat = stat;
 	}
 
 

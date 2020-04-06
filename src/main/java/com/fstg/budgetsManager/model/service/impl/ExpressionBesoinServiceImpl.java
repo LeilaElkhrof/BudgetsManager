@@ -45,15 +45,17 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 			// Personnel Doesn't exist
 			return -1;
 		} else {
-			/*
-			 * get The Personnel EntiteAdmin EntiteAdministrative enAdBD =
-			 * es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
-			 */
-			expb.setSaveDate(new Date());
-			expb.setPersonnel(chefBD);
-			expbDao.save(expb);
-			ebps.valideAndsaveEBP(exbProduit, expb);
-			return 1;
+			EntiteAdministrative enAdBD = es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
+			if (!expb.getEntiteAdministrative().getLibelle().equals(enAdBD.getLibelle())) {
+				return -2;
+			} else {
+				expb.setSaveDate(new Date());
+				expb.setPersonnel(chefBD);
+				expb.setEntiteAdministrative(enAdBD);
+				expbDao.save(expb);
+				ebps.valideAndsaveEBP(exbProduit, expb);
+				return 1;
+			}
 
 		}
 
@@ -71,20 +73,29 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 			// Personnel Doesn't exist
 			return -1;
 		} else {
-			/*
-			 * get The Personnel EntiteAdmin EntiteAdministrative enAdBD =
-			 * es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
-			 * testInfo(chefBD, enAdBD);
-			 */
+			EntiteAdministrative enAdBD = es.findByLibelle(chefBD.getEntiteAdm().getLibelle());
+			if (!expb.getEntiteAdministrative().getLibelle().equals(enAdBD.getLibelle())) {
+				return -2;
+			} else {
+				expb.setLastUpDate(new Date());
+				calculerMontant(expb, exbProduit);
+				expbDao.save(expb);
+				ebps.valideAndsaveEBP(exbProduit, expb);
+				return 1;
 
-			expb.setLastUpDate(new Date());
-			expbDao.save(expb);
-			ebps.valideAndsaveEBP(exbProduit, expb);
-			return 1;
+			}
 
 		}
 	}
-	
+
+	private void calculerMontant(ExpressionBesoin expb, List<ExpressionBesoinProduit> exbProduit) {
+		double m = 0;
+		for (ExpressionBesoinProduit expressionBesoinProduit : exbProduit) {
+			m = m + (expressionBesoinProduit.getQteAccorde() * expressionBesoinProduit.getProduit().getPrice());
+		}
+		expb.setMontantTotal(m);
+	}
+
 	@Override
 	public int deleteById(Long id) {
 		int res = ebps.deleteByEbId(id);
@@ -95,6 +106,7 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 	public boolean testInfo(Personnel p, EntiteAdministrative e) {
 		return true;
 	}
+
 	@Override
 	public List<ExpressionBesoin> getAllExpB() {
 		return expbDao.findAll();
